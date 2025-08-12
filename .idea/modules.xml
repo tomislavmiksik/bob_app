@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/apps/bob_be/bob_be_client/melos_bob_be_client.iml" filepath="$PROJECT_DIR$/apps/bob_be/bob_be_client/melos_bob_be_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/bob_be/bob_be_flutter/melos_bob_be_flutter.iml" filepath="$PROJECT_DIR$/apps/bob_be/bob_be_flutter/melos_bob_be_flutter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/bob_be/bob_be_server/melos_bob_be_server.iml" filepath="$PROJECT_DIR$/apps/bob_be/bob_be_server/melos_bob_be_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/bob_fe/melos_bob_fe.iml" filepath="$PROJECT_DIR$/apps/bob_fe/melos_bob_fe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_bob_app.iml" filepath="$PROJECT_DIR$/melos_bob_app.iml" />
+    </modules>
+  </component>
+</project>

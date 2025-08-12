@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: bob_be_client
+dependency_overrides:
+  bob_be_client:
+    path: ../bob_be_client

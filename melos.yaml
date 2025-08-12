@@ -1,0 +1,6 @@
+name: bob_app
+
+packages:
+  - apps/**
+  - packages/**
+
