@@ -1,0 +1,6 @@
+enum: CiCdPlatform
+serialized: byName
+values:
+  - Codemagic
+  - GitHubActions
+  - Jenkins

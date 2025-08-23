@@ -1,6 +1,21 @@
 name: bob_app
-
 packages:
   - apps/**
   - packages/**
 
+scripts:
+  generate:all:
+    run: |
+      serverpod generate
+      fvm dart run tools/generate_shared_exports.dart
+    description: Generate serverpod classes and update shared exports
+
+  generate:exports:
+    run: fvm dart run tools/generate_shared_exports.dart
+    description: Update shared model exports
+
+  dev:server:
+    run: serverpod run
+
+  dev:frontend:
+    run: fvm flutter run
