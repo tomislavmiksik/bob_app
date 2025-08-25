@@ -16,9 +16,7 @@ scripts:
 
   generate:serverpod:
     description: Generate Serverpod client
-    run: |
-      cd apps/bob_be/bob_be_server
-      serverpod generate
+    exec: serverpod generate
     packageFilters:
       scope: bob_be_server
 
