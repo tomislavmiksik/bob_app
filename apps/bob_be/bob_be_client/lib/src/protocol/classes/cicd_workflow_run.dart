@@ -12,8 +12,8 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import '../enums/cicd_workflow_platform.dart' as _i2;
 
-abstract class CICDWorkflowRun implements _i1.SerializableModel {
-  CICDWorkflowRun._({
+abstract class CICDWorkflowEvent implements _i1.SerializableModel {
+  CICDWorkflowEvent._({
     _i1.UuidValue? id,
     required this.workflowName,
     required this.buildId,
@@ -34,7 +34,7 @@ abstract class CICDWorkflowRun implements _i1.SerializableModel {
     this.updatedAt,
   }) : id = id ?? _i1.Uuid().v4obj();
 
-  factory CICDWorkflowRun({
+  factory CICDWorkflowEvent({
     _i1.UuidValue? id,
     required String workflowName,
     required String buildId,
@@ -53,10 +53,10 @@ abstract class CICDWorkflowRun implements _i1.SerializableModel {
     int? pullRequestNumber,
     required DateTime createdAt,
     DateTime? updatedAt,
-  }) = _CICDWorkflowRunImpl;
+  }) = _CICDWorkflowEventImpl;
 
-  factory CICDWorkflowRun.fromJson(Map<String, dynamic> jsonSerialization) {
-    return CICDWorkflowRun(
+  factory CICDWorkflowEvent.fromJson(Map<String, dynamic> jsonSerialization) {
+    return CICDWorkflowEvent(
       id: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['id']),
       workflowName: jsonSerialization['workflowName'] as String,
       buildId: jsonSerialization['buildId'] as String,
@@ -126,10 +126,10 @@ abstract class CICDWorkflowRun implements _i1.SerializableModel {
 
   DateTime? updatedAt;
 
-  /// Returns a shallow copy of this [CICDWorkflowRun]
+  /// Returns a shallow copy of this [CICDWorkflowEvent]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
-  CICDWorkflowRun copyWith({
+  CICDWorkflowEvent copyWith({
     _i1.UuidValue? id,
     String? workflowName,
     String? buildId,
@@ -181,8 +181,8 @@ abstract class CICDWorkflowRun implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _CICDWorkflowRunImpl extends CICDWorkflowRun {
-  _CICDWorkflowRunImpl({
+class _CICDWorkflowEventImpl extends CICDWorkflowEvent {
+  _CICDWorkflowEventImpl({
     _i1.UuidValue? id,
     required String workflowName,
     required String buildId,
@@ -222,11 +222,11 @@ class _CICDWorkflowRunImpl extends CICDWorkflowRun {
           updatedAt: updatedAt,
         );
 
-  /// Returns a shallow copy of this [CICDWorkflowRun]
+  /// Returns a shallow copy of this [CICDWorkflowEvent]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
   @override
-  CICDWorkflowRun copyWith({
+  CICDWorkflowEvent copyWith({
     _i1.UuidValue? id,
     String? workflowName,
     String? buildId,
@@ -246,7 +246,7 @@ class _CICDWorkflowRunImpl extends CICDWorkflowRun {
     DateTime? createdAt,
     Object? updatedAt = _Undefined,
   }) {
-    return CICDWorkflowRun(
+    return CICDWorkflowEvent(
       id: id ?? this.id,
       workflowName: workflowName ?? this.workflowName,
       buildId: buildId ?? this.buildId,

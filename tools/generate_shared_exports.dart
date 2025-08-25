@@ -3,20 +3,23 @@ import 'dart:io';
 void main() {
   final generatedDir = Directory('apps/bob_be/bob_be_server/lib/src/generated');
   final exports = <String>[];
-  
+
   // Scan for .dart files (excluding protocol.dart to avoid circular imports)
   if (generatedDir.existsSync()) {
     generatedDir
         .listSync(recursive: true)
         .whereType<File>()
-        .where((f) => f.path.endsWith('.dart') && !f.path.endsWith('protocol.dart'))
+        .where((f) =>
+            f.path.endsWith('.dart') && !f.path.endsWith('protocol.dart'))
         .forEach((file) {
       final relativePath = file.path.replaceFirst(RegExp(r'.*lib/'), '');
-      exports.add("export 'package:bob_be_server/lib/$relativePath';");
+      exports.add("export 'package:bob_be_server/$relativePath';");
     });
   }
 
-  final content = '''library bob_models;
+  final content =
+      '''//GENERATED - DO NOT MODIFY BY HAND - exports of generated models from the serverpod client 
+library bob_models;
 
 ${exports.join('\n')}
 ''';

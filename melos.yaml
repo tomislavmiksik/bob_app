@@ -26,13 +26,18 @@ scripts:
   dev:frontend:
     run: fvm flutter run
 
+  dev:docker-compose:
+    description: Run docker containers for serverpod
+    exec: docker compose up --build --detach
+    packageFilters:
+      scope: bob_be_server
 
   deps:get:
     exec: |
       if grep -q "flutter" pubspec.yaml; then
         fvm flutter pub get
       else
-        dart pub get
+        fvm dart pub get
       fi
     packageFilters:
       ignore: bob_app  # Skip workspace root

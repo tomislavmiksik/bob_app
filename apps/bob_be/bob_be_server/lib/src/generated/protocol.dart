@@ -11,9 +11,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'greeting.dart' as _i3;
-import 'classes/cicd_workflow_run.dart' as _i4;
-import 'enums/cicd_workflow_platform.dart' as _i5;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
+import 'greeting.dart' as _i4;
+import 'classes/cicd_workflow_run.dart' as _i5;
+import 'enums/cicd_workflow_platform.dart' as _i6;
 export 'greeting.dart';
 export 'classes/cicd_workflow_run.dart';
 export 'enums/cicd_workflow_platform.dart';
@@ -27,8 +28,8 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
     _i2.TableDefinition(
-      name: 'cicd_workflow_runs',
-      dartName: 'CICDWorkflowRun',
+      name: 'cicd_workflow_events',
+      dartName: 'CICDWorkflowEvent',
       schema: 'public',
       module: 'bob_be',
       columns: [
@@ -145,7 +146,7 @@ class Protocol extends _i1.SerializationManagerServer {
       foreignKeys: [],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'cicd_workflow_runs_pkey',
+          indexName: 'cicd_workflow_events_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -160,6 +161,7 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
+    ..._i3.Protocol.targetTableDefinitions,
     ..._i2.Protocol.targetTableDefinitions,
   ];
 
@@ -169,24 +171,27 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.Greeting) {
-      return _i3.Greeting.fromJson(data) as T;
+    if (t == _i4.Greeting) {
+      return _i4.Greeting.fromJson(data) as T;
     }
-    if (t == _i4.CICDWorkflowRun) {
-      return _i4.CICDWorkflowRun.fromJson(data) as T;
+    if (t == _i5.CICDWorkflowEvent) {
+      return _i5.CICDWorkflowEvent.fromJson(data) as T;
     }
-    if (t == _i5.CiCdPlatform) {
-      return _i5.CiCdPlatform.fromJson(data) as T;
+    if (t == _i6.CiCdPlatform) {
+      return _i6.CiCdPlatform.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Greeting?>()) {
-      return (data != null ? _i3.Greeting.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.Greeting?>()) {
+      return (data != null ? _i4.Greeting.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i4.CICDWorkflowRun?>()) {
-      return (data != null ? _i4.CICDWorkflowRun.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i5.CICDWorkflowEvent?>()) {
+      return (data != null ? _i5.CICDWorkflowEvent.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i5.CiCdPlatform?>()) {
-      return (data != null ? _i5.CiCdPlatform.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i6.CiCdPlatform?>()) {
+      return (data != null ? _i6.CiCdPlatform.fromJson(data) : null) as T;
     }
+    try {
+      return _i3.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
       return _i2.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
@@ -197,18 +202,22 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i3.Greeting) {
+    if (data is _i4.Greeting) {
       return 'Greeting';
     }
-    if (data is _i4.CICDWorkflowRun) {
-      return 'CICDWorkflowRun';
+    if (data is _i5.CICDWorkflowEvent) {
+      return 'CICDWorkflowEvent';
     }
-    if (data is _i5.CiCdPlatform) {
+    if (data is _i6.CiCdPlatform) {
       return 'CiCdPlatform';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod.$className';
+    }
+    className = _i3.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
     }
     return null;
   }
@@ -220,17 +229,21 @@ class Protocol extends _i1.SerializationManagerServer {
       return super.deserializeByClassName(data);
     }
     if (dataClassName == 'Greeting') {
-      return deserialize<_i3.Greeting>(data['data']);
+      return deserialize<_i4.Greeting>(data['data']);
     }
-    if (dataClassName == 'CICDWorkflowRun') {
-      return deserialize<_i4.CICDWorkflowRun>(data['data']);
+    if (dataClassName == 'CICDWorkflowEvent') {
+      return deserialize<_i5.CICDWorkflowEvent>(data['data']);
     }
     if (dataClassName == 'CiCdPlatform') {
-      return deserialize<_i5.CiCdPlatform>(data['data']);
+      return deserialize<_i6.CiCdPlatform>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
       return _i2.Protocol().deserializeByClassName(data);
+    }
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
+      return _i3.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
@@ -238,14 +251,20 @@ class Protocol extends _i1.SerializationManagerServer {
   @override
   _i1.Table? getTableForType(Type t) {
     {
+      var table = _i3.Protocol().getTableForType(t);
+      if (table != null) {
+        return table;
+      }
+    }
+    {
       var table = _i2.Protocol().getTableForType(t);
       if (table != null) {
         return table;
       }
     }
     switch (t) {
-      case _i4.CICDWorkflowRun:
-        return _i4.CICDWorkflowRun.t;
+      case _i5.CICDWorkflowEvent:
+        return _i5.CICDWorkflowEvent.t;
     }
     return null;
   }

@@ -12,9 +12,9 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../enums/cicd_workflow_platform.dart' as _i2;
 
-abstract class CICDWorkflowRun
+abstract class CICDWorkflowEvent
     implements _i1.TableRow<_i1.UuidValue>, _i1.ProtocolSerialization {
-  CICDWorkflowRun._({
+  CICDWorkflowEvent._({
     _i1.UuidValue? id,
     required this.workflowName,
     required this.buildId,
@@ -35,7 +35,7 @@ abstract class CICDWorkflowRun
     this.updatedAt,
   }) : id = id ?? _i1.Uuid().v4obj();
 
-  factory CICDWorkflowRun({
+  factory CICDWorkflowEvent({
     _i1.UuidValue? id,
     required String workflowName,
     required String buildId,
@@ -54,10 +54,10 @@ abstract class CICDWorkflowRun
     int? pullRequestNumber,
     required DateTime createdAt,
     DateTime? updatedAt,
-  }) = _CICDWorkflowRunImpl;
+  }) = _CICDWorkflowEventImpl;
 
-  factory CICDWorkflowRun.fromJson(Map<String, dynamic> jsonSerialization) {
-    return CICDWorkflowRun(
+  factory CICDWorkflowEvent.fromJson(Map<String, dynamic> jsonSerialization) {
+    return CICDWorkflowEvent(
       id: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['id']),
       workflowName: jsonSerialization['workflowName'] as String,
       buildId: jsonSerialization['buildId'] as String,
@@ -88,9 +88,9 @@ abstract class CICDWorkflowRun
     );
   }
 
-  static final t = CICDWorkflowRunTable();
+  static final t = CICDWorkflowEventTable();
 
-  static const db = CICDWorkflowRunRepository._();
+  static const db = CICDWorkflowEventRepository._();
 
   @override
   _i1.UuidValue id;
@@ -132,10 +132,10 @@ abstract class CICDWorkflowRun
   @override
   _i1.Table<_i1.UuidValue> get table => t;
 
-  /// Returns a shallow copy of this [CICDWorkflowRun]
+  /// Returns a shallow copy of this [CICDWorkflowEvent]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
-  CICDWorkflowRun copyWith({
+  CICDWorkflowEvent copyWith({
     _i1.UuidValue? id,
     String? workflowName,
     String? buildId,
@@ -203,26 +203,26 @@ abstract class CICDWorkflowRun
     };
   }
 
-  static CICDWorkflowRunInclude include() {
-    return CICDWorkflowRunInclude._();
+  static CICDWorkflowEventInclude include() {
+    return CICDWorkflowEventInclude._();
   }
 
-  static CICDWorkflowRunIncludeList includeList({
-    _i1.WhereExpressionBuilder<CICDWorkflowRunTable>? where,
+  static CICDWorkflowEventIncludeList includeList({
+    _i1.WhereExpressionBuilder<CICDWorkflowEventTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<CICDWorkflowRunTable>? orderBy,
+    _i1.OrderByBuilder<CICDWorkflowEventTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CICDWorkflowRunTable>? orderByList,
-    CICDWorkflowRunInclude? include,
+    _i1.OrderByListBuilder<CICDWorkflowEventTable>? orderByList,
+    CICDWorkflowEventInclude? include,
   }) {
-    return CICDWorkflowRunIncludeList._(
+    return CICDWorkflowEventIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(CICDWorkflowRun.t),
+      orderBy: orderBy?.call(CICDWorkflowEvent.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(CICDWorkflowRun.t),
+      orderByList: orderByList?.call(CICDWorkflowEvent.t),
       include: include,
     );
   }
@@ -235,8 +235,8 @@ abstract class CICDWorkflowRun
 
 class _Undefined {}
 
-class _CICDWorkflowRunImpl extends CICDWorkflowRun {
-  _CICDWorkflowRunImpl({
+class _CICDWorkflowEventImpl extends CICDWorkflowEvent {
+  _CICDWorkflowEventImpl({
     _i1.UuidValue? id,
     required String workflowName,
     required String buildId,
@@ -276,11 +276,11 @@ class _CICDWorkflowRunImpl extends CICDWorkflowRun {
           updatedAt: updatedAt,
         );
 
-  /// Returns a shallow copy of this [CICDWorkflowRun]
+  /// Returns a shallow copy of this [CICDWorkflowEvent]
   /// with some or all fields replaced by the given arguments.
   @_i1.useResult
   @override
-  CICDWorkflowRun copyWith({
+  CICDWorkflowEvent copyWith({
     _i1.UuidValue? id,
     String? workflowName,
     String? buildId,
@@ -300,7 +300,7 @@ class _CICDWorkflowRunImpl extends CICDWorkflowRun {
     DateTime? createdAt,
     Object? updatedAt = _Undefined,
   }) {
-    return CICDWorkflowRun(
+    return CICDWorkflowEvent(
       id: id ?? this.id,
       workflowName: workflowName ?? this.workflowName,
       buildId: buildId ?? this.buildId,
@@ -326,9 +326,9 @@ class _CICDWorkflowRunImpl extends CICDWorkflowRun {
   }
 }
 
-class CICDWorkflowRunTable extends _i1.Table<_i1.UuidValue> {
-  CICDWorkflowRunTable({super.tableRelation})
-      : super(tableName: 'cicd_workflow_runs') {
+class CICDWorkflowEventTable extends _i1.Table<_i1.UuidValue> {
+  CICDWorkflowEventTable({super.tableRelation})
+      : super(tableName: 'cicd_workflow_events') {
     workflowName = _i1.ColumnString(
       'workflowName',
       this,
@@ -457,19 +457,19 @@ class CICDWorkflowRunTable extends _i1.Table<_i1.UuidValue> {
       ];
 }
 
-class CICDWorkflowRunInclude extends _i1.IncludeObject {
-  CICDWorkflowRunInclude._();
+class CICDWorkflowEventInclude extends _i1.IncludeObject {
+  CICDWorkflowEventInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table<_i1.UuidValue> get table => CICDWorkflowRun.t;
+  _i1.Table<_i1.UuidValue> get table => CICDWorkflowEvent.t;
 }
 
-class CICDWorkflowRunIncludeList extends _i1.IncludeList {
-  CICDWorkflowRunIncludeList._({
-    _i1.WhereExpressionBuilder<CICDWorkflowRunTable>? where,
+class CICDWorkflowEventIncludeList extends _i1.IncludeList {
+  CICDWorkflowEventIncludeList._({
+    _i1.WhereExpressionBuilder<CICDWorkflowEventTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -477,20 +477,20 @@ class CICDWorkflowRunIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(CICDWorkflowRun.t);
+    super.where = where?.call(CICDWorkflowEvent.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table<_i1.UuidValue> get table => CICDWorkflowRun.t;
+  _i1.Table<_i1.UuidValue> get table => CICDWorkflowEvent.t;
 }
 
-class CICDWorkflowRunRepository {
-  const CICDWorkflowRunRepository._();
+class CICDWorkflowEventRepository {
+  const CICDWorkflowEventRepository._();
 
-  /// Returns a list of [CICDWorkflowRun]s matching the given query parameters.
+  /// Returns a list of [CICDWorkflowEvent]s matching the given query parameters.
   ///
   /// Use [where] to specify which items to include in the return value.
   /// If none is specified, all items will be returned.
@@ -512,20 +512,20 @@ class CICDWorkflowRunRepository {
   ///   limit: 100,
   /// );
   /// ```
-  Future<List<CICDWorkflowRun>> find(
+  Future<List<CICDWorkflowEvent>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CICDWorkflowRunTable>? where,
+    _i1.WhereExpressionBuilder<CICDWorkflowEventTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<CICDWorkflowRunTable>? orderBy,
+    _i1.OrderByBuilder<CICDWorkflowEventTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CICDWorkflowRunTable>? orderByList,
+    _i1.OrderByListBuilder<CICDWorkflowEventTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<CICDWorkflowRun>(
-      where: where?.call(CICDWorkflowRun.t),
-      orderBy: orderBy?.call(CICDWorkflowRun.t),
-      orderByList: orderByList?.call(CICDWorkflowRun.t),
+    return session.db.find<CICDWorkflowEvent>(
+      where: where?.call(CICDWorkflowEvent.t),
+      orderBy: orderBy?.call(CICDWorkflowEvent.t),
+      orderByList: orderByList?.call(CICDWorkflowEvent.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -533,7 +533,7 @@ class CICDWorkflowRunRepository {
     );
   }
 
-  /// Returns the first matching [CICDWorkflowRun] matching the given query parameters.
+  /// Returns the first matching [CICDWorkflowEvent] matching the given query parameters.
   ///
   /// Use [where] to specify which items to include in the return value.
   /// If none is specified, all items will be returned.
@@ -550,136 +550,136 @@ class CICDWorkflowRunRepository {
   ///   orderBy: (t) => t.age,
   /// );
   /// ```
-  Future<CICDWorkflowRun?> findFirstRow(
+  Future<CICDWorkflowEvent?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CICDWorkflowRunTable>? where,
+    _i1.WhereExpressionBuilder<CICDWorkflowEventTable>? where,
     int? offset,
-    _i1.OrderByBuilder<CICDWorkflowRunTable>? orderBy,
+    _i1.OrderByBuilder<CICDWorkflowEventTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<CICDWorkflowRunTable>? orderByList,
+    _i1.OrderByListBuilder<CICDWorkflowEventTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<CICDWorkflowRun>(
-      where: where?.call(CICDWorkflowRun.t),
-      orderBy: orderBy?.call(CICDWorkflowRun.t),
-      orderByList: orderByList?.call(CICDWorkflowRun.t),
+    return session.db.findFirstRow<CICDWorkflowEvent>(
+      where: where?.call(CICDWorkflowEvent.t),
+      orderBy: orderBy?.call(CICDWorkflowEvent.t),
+      orderByList: orderByList?.call(CICDWorkflowEvent.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  /// Finds a single [CICDWorkflowRun] by its [id] or null if no such row exists.
-  Future<CICDWorkflowRun?> findById(
+  /// Finds a single [CICDWorkflowEvent] by its [id] or null if no such row exists.
+  Future<CICDWorkflowEvent?> findById(
     _i1.Session session,
     _i1.UuidValue id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<CICDWorkflowRun>(
+    return session.db.findById<CICDWorkflowEvent>(
       id,
       transaction: transaction,
     );
   }
 
-  /// Inserts all [CICDWorkflowRun]s in the list and returns the inserted rows.
+  /// Inserts all [CICDWorkflowEvent]s in the list and returns the inserted rows.
   ///
-  /// The returned [CICDWorkflowRun]s will have their `id` fields set.
+  /// The returned [CICDWorkflowEvent]s will have their `id` fields set.
   ///
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// insert, none of the rows will be inserted.
-  Future<List<CICDWorkflowRun>> insert(
+  Future<List<CICDWorkflowEvent>> insert(
     _i1.Session session,
-    List<CICDWorkflowRun> rows, {
+    List<CICDWorkflowEvent> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<CICDWorkflowRun>(
+    return session.db.insert<CICDWorkflowEvent>(
       rows,
       transaction: transaction,
     );
   }
 
-  /// Inserts a single [CICDWorkflowRun] and returns the inserted row.
+  /// Inserts a single [CICDWorkflowEvent] and returns the inserted row.
   ///
-  /// The returned [CICDWorkflowRun] will have its `id` field set.
-  Future<CICDWorkflowRun> insertRow(
+  /// The returned [CICDWorkflowEvent] will have its `id` field set.
+  Future<CICDWorkflowEvent> insertRow(
     _i1.Session session,
-    CICDWorkflowRun row, {
+    CICDWorkflowEvent row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<CICDWorkflowRun>(
+    return session.db.insertRow<CICDWorkflowEvent>(
       row,
       transaction: transaction,
     );
   }
 
-  /// Updates all [CICDWorkflowRun]s in the list and returns the updated rows. If
+  /// Updates all [CICDWorkflowEvent]s in the list and returns the updated rows. If
   /// [columns] is provided, only those columns will be updated. Defaults to
   /// all columns.
   /// This is an atomic operation, meaning that if one of the rows fails to
   /// update, none of the rows will be updated.
-  Future<List<CICDWorkflowRun>> update(
+  Future<List<CICDWorkflowEvent>> update(
     _i1.Session session,
-    List<CICDWorkflowRun> rows, {
-    _i1.ColumnSelections<CICDWorkflowRunTable>? columns,
+    List<CICDWorkflowEvent> rows, {
+    _i1.ColumnSelections<CICDWorkflowEventTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<CICDWorkflowRun>(
+    return session.db.update<CICDWorkflowEvent>(
       rows,
-      columns: columns?.call(CICDWorkflowRun.t),
+      columns: columns?.call(CICDWorkflowEvent.t),
       transaction: transaction,
     );
   }
 
-  /// Updates a single [CICDWorkflowRun]. The row needs to have its id set.
+  /// Updates a single [CICDWorkflowEvent]. The row needs to have its id set.
   /// Optionally, a list of [columns] can be provided to only update those
   /// columns. Defaults to all columns.
-  Future<CICDWorkflowRun> updateRow(
+  Future<CICDWorkflowEvent> updateRow(
     _i1.Session session,
-    CICDWorkflowRun row, {
-    _i1.ColumnSelections<CICDWorkflowRunTable>? columns,
+    CICDWorkflowEvent row, {
+    _i1.ColumnSelections<CICDWorkflowEventTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<CICDWorkflowRun>(
+    return session.db.updateRow<CICDWorkflowEvent>(
       row,
-      columns: columns?.call(CICDWorkflowRun.t),
+      columns: columns?.call(CICDWorkflowEvent.t),
       transaction: transaction,
     );
   }
 
-  /// Deletes all [CICDWorkflowRun]s in the list and returns the deleted rows.
+  /// Deletes all [CICDWorkflowEvent]s in the list and returns the deleted rows.
   /// This is an atomic operation, meaning that if one of the rows fail to
   /// be deleted, none of the rows will be deleted.
-  Future<List<CICDWorkflowRun>> delete(
+  Future<List<CICDWorkflowEvent>> delete(
     _i1.Session session,
-    List<CICDWorkflowRun> rows, {
+    List<CICDWorkflowEvent> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<CICDWorkflowRun>(
+    return session.db.delete<CICDWorkflowEvent>(
       rows,
       transaction: transaction,
     );
   }
 
-  /// Deletes a single [CICDWorkflowRun].
-  Future<CICDWorkflowRun> deleteRow(
+  /// Deletes a single [CICDWorkflowEvent].
+  Future<CICDWorkflowEvent> deleteRow(
     _i1.Session session,
-    CICDWorkflowRun row, {
+    CICDWorkflowEvent row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<CICDWorkflowRun>(
+    return session.db.deleteRow<CICDWorkflowEvent>(
       row,
       transaction: transaction,
     );
   }
 
   /// Deletes all rows matching the [where] expression.
-  Future<List<CICDWorkflowRun>> deleteWhere(
+  Future<List<CICDWorkflowEvent>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<CICDWorkflowRunTable> where,
+    required _i1.WhereExpressionBuilder<CICDWorkflowEventTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<CICDWorkflowRun>(
-      where: where(CICDWorkflowRun.t),
+    return session.db.deleteWhere<CICDWorkflowEvent>(
+      where: where(CICDWorkflowEvent.t),
       transaction: transaction,
     );
   }
@@ -688,12 +688,12 @@ class CICDWorkflowRunRepository {
   /// will return the count of all rows in the table.
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<CICDWorkflowRunTable>? where,
+    _i1.WhereExpressionBuilder<CICDWorkflowEventTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<CICDWorkflowRun>(
-      where: where?.call(CICDWorkflowRun.t),
+    return session.db.count<CICDWorkflowEvent>(
+      where: where?.call(CICDWorkflowEvent.t),
       limit: limit,
       transaction: transaction,
     );

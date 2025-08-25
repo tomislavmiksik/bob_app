@@ -1,18 +1,18 @@
-class: CICDWorkflowRun
-table: cicd_workflow_runs
+class: CICDWorkflowEvent
+table: cicd_workflow_events
 fields:
   id: UuidValue, defaultModel=random
   workflowName: String
   buildId: String
   branch: String
   commitSha: String
-  status: String      # success, failure, cancelled, running
+  status: String # success, failure, cancelled, running
   startTime: DateTime
   endTime: DateTime?
-  duration: int?      # in seconds
+  duration: int? # in seconds
   triggerType: String # push, pull_request, manual, schedule
   environment: String? # production, staging, development
-  platform: CiCdPlatform?   # github_actions, codemagic
+  platform: CiCdPlatform? # github_actions, codemagic
   repositoryName: String?
   authorName: String?
   authorEmail: String?
