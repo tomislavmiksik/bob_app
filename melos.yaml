@@ -25,3 +25,14 @@ scripts:
 
   dev:frontend:
     run: fvm flutter run
+
+
+  deps:get:
+    exec: |
+      if grep -q "flutter" pubspec.yaml; then
+        fvm flutter pub get
+      else
+        dart pub get
+      fi
+    packageFilters:
+      ignore: bob_app  # Skip workspace root
