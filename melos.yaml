@@ -5,14 +5,22 @@ packages:
 
 scripts:
   generate:all:
-    run: |
-      serverpod generate
-      fvm dart run tools/generate_shared_exports.dart
+    steps:
+      - melos run generate:serverpod --no-select
+      - melos run generate:exports
     description: Generate serverpod classes and update shared exports
 
   generate:exports:
     run: fvm dart run tools/generate_shared_exports.dart
     description: Update shared model exports
+
+  generate:serverpod:
+    description: Generate Serverpod client
+    run: |
+      cd apps/bob_be/bob_be_server
+      serverpod generate
+    packageFilters:
+      scope: bob_be_server
 
   dev:server:
     run: serverpod run

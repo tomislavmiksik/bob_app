@@ -230,10 +230,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-08-12T15:48:00.639782Z",
+  "generated": "2025-08-25T08:32:44.252410Z",
   "generator": "pub",
-  "generatorVersion": "3.7.0",
-  "flutterRoot": "file:///opt/homebrew/Caskroom/flutter/3.29.0/flutter",
-  "flutterVersion": "3.29.0",
+  "generatorVersion": "3.6.0",
+  "flutterRoot": "file:///Users/tomislavmiksik/fvm/versions/3.27.0",
+  "flutterVersion": "3.27.0",
   "pubCache": "file:///Users/tomislavmiksik/.pub-cache"
 }
