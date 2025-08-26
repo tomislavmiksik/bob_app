@@ -21,12 +21,16 @@ scripts:
       scope: bob_be_server
 
   dev:server:
-    run: serverpod run
+    exec: dart run bin/main.dart --apply-migrations
+    packageFilters:
+      scope: bob_be_server
 
   dev:frontend:
-    run: fvm flutter run
+    exec: fvm flutter run
+    packageFilters:
+      scope: bob_be_frontend
 
-  dev:docker-compose:
+  dev:docker-compose-db:
     description: Run docker containers for serverpod
     exec: docker compose up --build --detach
     packageFilters:

@@ -11,9 +11,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:bob_be_client/src/protocol/greeting.dart' as _i3;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:bob_be_client/src/protocol/classes/greeting.dart' as _i3;
+import 'package:bob_be_client/src/protocol/classes/cicd/cicd_workflow_event_detail.dart'
+    as _i4;
+import 'package:bob_be_client/src/protocol/classes/cicd/cicd_workflow_event_request.dart'
+    as _i5;
+import 'package:bob_be_client/src/protocol/classes/cicd/cicd_workflow_event_summary.dart'
+    as _i6;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i7;
+import 'protocol.dart' as _i8;
 
 /// This is an example endpoint that returns a greeting message through
 /// its [hello] method.
@@ -33,12 +39,35 @@ class EndpointGreeting extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointCicd extends _i1.EndpointRef {
+  EndpointCicd(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'cicd';
+
+  _i2.Future<_i4.CICDWorkflowEventDetail> logStep(
+          _i5.CICDWorkflowEventRequest request) =>
+      caller.callServerEndpoint<_i4.CICDWorkflowEventDetail>(
+        'cicd',
+        'logStep',
+        {'request': request},
+      );
+
+  _i2.Future<List<_i6.CICDWorkflowEventSummary>> getWorkflowSummaries() =>
+      caller.callServerEndpoint<List<_i6.CICDWorkflowEventSummary>>(
+        'cicd',
+        'getWorkflowSummaries',
+        {},
+      );
+}
+
 class Modules {
   Modules(Client client) {
-    auth = _i4.Caller(client);
+    auth = _i7.Caller(client);
   }
 
-  late final _i4.Caller auth;
+  late final _i7.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -57,7 +86,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i8.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -68,15 +97,21 @@ class Client extends _i1.ServerpodClientShared {
               disconnectStreamsOnLostInternetConnection,
         ) {
     greeting = EndpointGreeting(this);
+    cicd = EndpointCicd(this);
     modules = Modules(this);
   }
 
   late final EndpointGreeting greeting;
 
+  late final EndpointCicd cicd;
+
   late final Modules modules;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'greeting': greeting};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'greeting': greeting,
+        'cicd': cicd,
+      };
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>

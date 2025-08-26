@@ -1,0 +1,15 @@
+class: CICDWorkflowEventRequest
+fields:
+  workflowName: String
+  buildId: String
+  branch: String
+  commitSha: String
+  status: String
+  startTime: DateTime
+  triggerType: String
+  environment: String?
+  platform: CiCdPlatform?
+  repositoryName: String?
+  authorName: String?
+  authorEmail: String?
+  pullRequestNumber: int?

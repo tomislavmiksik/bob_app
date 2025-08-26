@@ -1,0 +1,8 @@
+class: CICDWorkflowEventSummary
+fields:
+  id: UuidValue?
+  workflowName: String
+  buildId: String
+  status: String
+  duration: int?
+  createdAt: DateTime

@@ -12,11 +12,19 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
-import 'greeting.dart' as _i4;
-import 'classes/cicd_workflow_run.dart' as _i5;
-import 'enums/cicd_workflow_platform.dart' as _i6;
-export 'greeting.dart';
-export 'classes/cicd_workflow_run.dart';
+import 'classes/cicd/cicd_workflow_event.dart' as _i4;
+import 'classes/cicd/cicd_workflow_event_detail.dart' as _i5;
+import 'classes/cicd/cicd_workflow_event_request.dart' as _i6;
+import 'classes/cicd/cicd_workflow_event_summary.dart' as _i7;
+import 'classes/greeting.dart' as _i8;
+import 'enums/cicd_workflow_platform.dart' as _i9;
+import 'package:bob_be_server/src/generated/classes/cicd/cicd_workflow_event_summary.dart'
+    as _i10;
+export 'classes/cicd/cicd_workflow_event.dart';
+export 'classes/cicd/cicd_workflow_event_detail.dart';
+export 'classes/cicd/cicd_workflow_event_request.dart';
+export 'classes/cicd/cicd_workflow_event_summary.dart';
+export 'classes/greeting.dart';
 export 'enums/cicd_workflow_platform.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -171,23 +179,49 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i4.Greeting) {
-      return _i4.Greeting.fromJson(data) as T;
+    if (t == _i4.CICDWorkflowEvent) {
+      return _i4.CICDWorkflowEvent.fromJson(data) as T;
     }
-    if (t == _i5.CICDWorkflowEvent) {
-      return _i5.CICDWorkflowEvent.fromJson(data) as T;
+    if (t == _i5.CICDWorkflowEventDetail) {
+      return _i5.CICDWorkflowEventDetail.fromJson(data) as T;
     }
-    if (t == _i6.CiCdPlatform) {
-      return _i6.CiCdPlatform.fromJson(data) as T;
+    if (t == _i6.CICDWorkflowEventRequest) {
+      return _i6.CICDWorkflowEventRequest.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.Greeting?>()) {
-      return (data != null ? _i4.Greeting.fromJson(data) : null) as T;
+    if (t == _i7.CICDWorkflowEventSummary) {
+      return _i7.CICDWorkflowEventSummary.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i5.CICDWorkflowEvent?>()) {
-      return (data != null ? _i5.CICDWorkflowEvent.fromJson(data) : null) as T;
+    if (t == _i8.Greeting) {
+      return _i8.Greeting.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i6.CiCdPlatform?>()) {
-      return (data != null ? _i6.CiCdPlatform.fromJson(data) : null) as T;
+    if (t == _i9.CiCdPlatform) {
+      return _i9.CiCdPlatform.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i4.CICDWorkflowEvent?>()) {
+      return (data != null ? _i4.CICDWorkflowEvent.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i5.CICDWorkflowEventDetail?>()) {
+      return (data != null ? _i5.CICDWorkflowEventDetail.fromJson(data) : null)
+          as T;
+    }
+    if (t == _i1.getType<_i6.CICDWorkflowEventRequest?>()) {
+      return (data != null ? _i6.CICDWorkflowEventRequest.fromJson(data) : null)
+          as T;
+    }
+    if (t == _i1.getType<_i7.CICDWorkflowEventSummary?>()) {
+      return (data != null ? _i7.CICDWorkflowEventSummary.fromJson(data) : null)
+          as T;
+    }
+    if (t == _i1.getType<_i8.Greeting?>()) {
+      return (data != null ? _i8.Greeting.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i9.CiCdPlatform?>()) {
+      return (data != null ? _i9.CiCdPlatform.fromJson(data) : null) as T;
+    }
+    if (t == List<_i10.CICDWorkflowEventSummary>) {
+      return (data as List)
+          .map((e) => deserialize<_i10.CICDWorkflowEventSummary>(e))
+          .toList() as T;
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
@@ -202,13 +236,22 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i4.Greeting) {
-      return 'Greeting';
-    }
-    if (data is _i5.CICDWorkflowEvent) {
+    if (data is _i4.CICDWorkflowEvent) {
       return 'CICDWorkflowEvent';
     }
-    if (data is _i6.CiCdPlatform) {
+    if (data is _i5.CICDWorkflowEventDetail) {
+      return 'CICDWorkflowEventDetail';
+    }
+    if (data is _i6.CICDWorkflowEventRequest) {
+      return 'CICDWorkflowEventRequest';
+    }
+    if (data is _i7.CICDWorkflowEventSummary) {
+      return 'CICDWorkflowEventSummary';
+    }
+    if (data is _i8.Greeting) {
+      return 'Greeting';
+    }
+    if (data is _i9.CiCdPlatform) {
       return 'CiCdPlatform';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -228,14 +271,23 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'Greeting') {
-      return deserialize<_i4.Greeting>(data['data']);
-    }
     if (dataClassName == 'CICDWorkflowEvent') {
-      return deserialize<_i5.CICDWorkflowEvent>(data['data']);
+      return deserialize<_i4.CICDWorkflowEvent>(data['data']);
+    }
+    if (dataClassName == 'CICDWorkflowEventDetail') {
+      return deserialize<_i5.CICDWorkflowEventDetail>(data['data']);
+    }
+    if (dataClassName == 'CICDWorkflowEventRequest') {
+      return deserialize<_i6.CICDWorkflowEventRequest>(data['data']);
+    }
+    if (dataClassName == 'CICDWorkflowEventSummary') {
+      return deserialize<_i7.CICDWorkflowEventSummary>(data['data']);
+    }
+    if (dataClassName == 'Greeting') {
+      return deserialize<_i8.Greeting>(data['data']);
     }
     if (dataClassName == 'CiCdPlatform') {
-      return deserialize<_i6.CiCdPlatform>(data['data']);
+      return deserialize<_i9.CiCdPlatform>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -263,8 +315,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i5.CICDWorkflowEvent:
-        return _i5.CICDWorkflowEvent.t;
+      case _i4.CICDWorkflowEvent:
+        return _i4.CICDWorkflowEvent.t;
     }
     return null;
   }

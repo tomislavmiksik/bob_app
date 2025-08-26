@@ -1,0 +1,20 @@
+class: CICDWorkflowEventDetail
+fields:
+  id: UuidValue?
+  workflowName: String
+  buildId: String
+  branch: String
+  commitSha: String
+  status: String
+  startTime: DateTime
+  endTime: DateTime?
+  duration: int?
+  triggerType: String
+  environment: String?
+  platform: CiCdPlatform?
+  repositoryName: String?
+  authorName: String?
+  authorEmail: String?
+  pullRequestNumber: int?
+  createdAt: DateTime
+  updatedAt: DateTime?
