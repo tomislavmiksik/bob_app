@@ -2,11 +2,16 @@ part of bob_app_endpoints;
 
 class CicdEndpoint extends Endpoint {
   Future<CICDWorkflowEventDetail> logStep(
-      Session session, CICDWorkflowEventRequest request) async {
+    Session session,
+    CICDWorkflowEventRequest request,
+  ) async {
     // Validate the request
     final validationErrors = request.validate();
     if (validationErrors.isNotEmpty) {
-      throw Exception('Validation failed: ${validationErrors.join(', ')}');
+      throw BadRequestException(
+        message: 'Validation failed: ${validationErrors.join(', ')}',
+        errorCode: 404,
+      );
     }
 
     // Convert request to entity and save

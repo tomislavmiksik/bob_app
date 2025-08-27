@@ -12,14 +12,16 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
-import 'classes/cicd/cicd_workflow_event.dart' as _i4;
-import 'classes/cicd/cicd_workflow_event_detail.dart' as _i5;
-import 'classes/cicd/cicd_workflow_event_request.dart' as _i6;
-import 'classes/cicd/cicd_workflow_event_summary.dart' as _i7;
-import 'classes/greeting.dart' as _i8;
-import 'enums/cicd_workflow_platform.dart' as _i9;
+import 'exceptions/bad_request_exception.dart' as _i4;
+import 'classes/cicd/cicd_workflow_event.dart' as _i5;
+import 'classes/cicd/cicd_workflow_event_detail.dart' as _i6;
+import 'classes/cicd/cicd_workflow_event_request.dart' as _i7;
+import 'classes/cicd/cicd_workflow_event_summary.dart' as _i8;
+import 'classes/greeting.dart' as _i9;
+import 'enums/cicd_workflow_platform.dart' as _i10;
 import 'package:bob_be_server/src/generated/classes/cicd/cicd_workflow_event_summary.dart'
-    as _i10;
+    as _i11;
+export 'exceptions/bad_request_exception.dart';
 export 'classes/cicd/cicd_workflow_event.dart';
 export 'classes/cicd/cicd_workflow_event_detail.dart';
 export 'classes/cicd/cicd_workflow_event_request.dart';
@@ -179,48 +181,55 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i4.CICDWorkflowEvent) {
-      return _i4.CICDWorkflowEvent.fromJson(data) as T;
+    if (t == _i4.BadRequestException) {
+      return _i4.BadRequestException.fromJson(data) as T;
     }
-    if (t == _i5.CICDWorkflowEventDetail) {
-      return _i5.CICDWorkflowEventDetail.fromJson(data) as T;
+    if (t == _i5.CICDWorkflowEvent) {
+      return _i5.CICDWorkflowEvent.fromJson(data) as T;
     }
-    if (t == _i6.CICDWorkflowEventRequest) {
-      return _i6.CICDWorkflowEventRequest.fromJson(data) as T;
+    if (t == _i6.CICDWorkflowEventDetail) {
+      return _i6.CICDWorkflowEventDetail.fromJson(data) as T;
     }
-    if (t == _i7.CICDWorkflowEventSummary) {
-      return _i7.CICDWorkflowEventSummary.fromJson(data) as T;
+    if (t == _i7.CICDWorkflowEventRequest) {
+      return _i7.CICDWorkflowEventRequest.fromJson(data) as T;
     }
-    if (t == _i8.Greeting) {
-      return _i8.Greeting.fromJson(data) as T;
+    if (t == _i8.CICDWorkflowEventSummary) {
+      return _i8.CICDWorkflowEventSummary.fromJson(data) as T;
     }
-    if (t == _i9.CiCdPlatform) {
-      return _i9.CiCdPlatform.fromJson(data) as T;
+    if (t == _i9.Greeting) {
+      return _i9.Greeting.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.CICDWorkflowEvent?>()) {
-      return (data != null ? _i4.CICDWorkflowEvent.fromJson(data) : null) as T;
+    if (t == _i10.CiCdPlatform) {
+      return _i10.CiCdPlatform.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i5.CICDWorkflowEventDetail?>()) {
-      return (data != null ? _i5.CICDWorkflowEventDetail.fromJson(data) : null)
+    if (t == _i1.getType<_i4.BadRequestException?>()) {
+      return (data != null ? _i4.BadRequestException.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i6.CICDWorkflowEventRequest?>()) {
-      return (data != null ? _i6.CICDWorkflowEventRequest.fromJson(data) : null)
+    if (t == _i1.getType<_i5.CICDWorkflowEvent?>()) {
+      return (data != null ? _i5.CICDWorkflowEvent.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i6.CICDWorkflowEventDetail?>()) {
+      return (data != null ? _i6.CICDWorkflowEventDetail.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i7.CICDWorkflowEventSummary?>()) {
-      return (data != null ? _i7.CICDWorkflowEventSummary.fromJson(data) : null)
+    if (t == _i1.getType<_i7.CICDWorkflowEventRequest?>()) {
+      return (data != null ? _i7.CICDWorkflowEventRequest.fromJson(data) : null)
           as T;
     }
-    if (t == _i1.getType<_i8.Greeting?>()) {
-      return (data != null ? _i8.Greeting.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i8.CICDWorkflowEventSummary?>()) {
+      return (data != null ? _i8.CICDWorkflowEventSummary.fromJson(data) : null)
+          as T;
     }
-    if (t == _i1.getType<_i9.CiCdPlatform?>()) {
-      return (data != null ? _i9.CiCdPlatform.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.Greeting?>()) {
+      return (data != null ? _i9.Greeting.fromJson(data) : null) as T;
     }
-    if (t == List<_i10.CICDWorkflowEventSummary>) {
+    if (t == _i1.getType<_i10.CiCdPlatform?>()) {
+      return (data != null ? _i10.CiCdPlatform.fromJson(data) : null) as T;
+    }
+    if (t == List<_i11.CICDWorkflowEventSummary>) {
       return (data as List)
-          .map((e) => deserialize<_i10.CICDWorkflowEventSummary>(e))
+          .map((e) => deserialize<_i11.CICDWorkflowEventSummary>(e))
           .toList() as T;
     }
     try {
@@ -236,22 +245,25 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i4.CICDWorkflowEvent) {
+    if (data is _i4.BadRequestException) {
+      return 'BadRequestException';
+    }
+    if (data is _i5.CICDWorkflowEvent) {
       return 'CICDWorkflowEvent';
     }
-    if (data is _i5.CICDWorkflowEventDetail) {
+    if (data is _i6.CICDWorkflowEventDetail) {
       return 'CICDWorkflowEventDetail';
     }
-    if (data is _i6.CICDWorkflowEventRequest) {
+    if (data is _i7.CICDWorkflowEventRequest) {
       return 'CICDWorkflowEventRequest';
     }
-    if (data is _i7.CICDWorkflowEventSummary) {
+    if (data is _i8.CICDWorkflowEventSummary) {
       return 'CICDWorkflowEventSummary';
     }
-    if (data is _i8.Greeting) {
+    if (data is _i9.Greeting) {
       return 'Greeting';
     }
-    if (data is _i9.CiCdPlatform) {
+    if (data is _i10.CiCdPlatform) {
       return 'CiCdPlatform';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -271,23 +283,26 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
+    if (dataClassName == 'BadRequestException') {
+      return deserialize<_i4.BadRequestException>(data['data']);
+    }
     if (dataClassName == 'CICDWorkflowEvent') {
-      return deserialize<_i4.CICDWorkflowEvent>(data['data']);
+      return deserialize<_i5.CICDWorkflowEvent>(data['data']);
     }
     if (dataClassName == 'CICDWorkflowEventDetail') {
-      return deserialize<_i5.CICDWorkflowEventDetail>(data['data']);
+      return deserialize<_i6.CICDWorkflowEventDetail>(data['data']);
     }
     if (dataClassName == 'CICDWorkflowEventRequest') {
-      return deserialize<_i6.CICDWorkflowEventRequest>(data['data']);
+      return deserialize<_i7.CICDWorkflowEventRequest>(data['data']);
     }
     if (dataClassName == 'CICDWorkflowEventSummary') {
-      return deserialize<_i7.CICDWorkflowEventSummary>(data['data']);
+      return deserialize<_i8.CICDWorkflowEventSummary>(data['data']);
     }
     if (dataClassName == 'Greeting') {
-      return deserialize<_i8.Greeting>(data['data']);
+      return deserialize<_i9.Greeting>(data['data']);
     }
     if (dataClassName == 'CiCdPlatform') {
-      return deserialize<_i9.CiCdPlatform>(data['data']);
+      return deserialize<_i10.CiCdPlatform>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -315,8 +330,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.CICDWorkflowEvent:
-        return _i4.CICDWorkflowEvent.t;
+      case _i5.CICDWorkflowEvent:
+        return _i5.CICDWorkflowEvent.t;
     }
     return null;
   }

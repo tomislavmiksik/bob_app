@@ -3,13 +3,13 @@ part of bob_app_extensions;
 extension CICDWorkflowEventRequestExtension on CICDWorkflowEventRequest {
   CICDWorkflowEvent toEntity() {
     return CICDWorkflowEvent(
-      workflowName: workflowName,
-      buildId: buildId,
-      branch: branch,
-      commitSha: commitSha,
-      status: status,
-      startTime: startTime,
-      triggerType: triggerType,
+      workflowName: workflowName ?? '',
+      buildId: buildId ?? '',
+      branch: branch ?? '',
+      commitSha: commitSha ?? '',
+      status: status ?? '',
+      startTime: startTime ?? DateTime.now(),
+      triggerType: triggerType ?? '',
       environment: environment,
       platform: platform,
       repositoryName: repositoryName,
@@ -22,13 +22,13 @@ extension CICDWorkflowEventRequestExtension on CICDWorkflowEventRequest {
 
   CICDWorkflowEvent toEntityWithTimestamp(DateTime timestamp) {
     return CICDWorkflowEvent(
-      workflowName: workflowName,
-      buildId: buildId,
-      branch: branch,
-      commitSha: commitSha,
-      status: status,
-      startTime: startTime,
-      triggerType: triggerType,
+      workflowName: workflowName ?? '',
+      buildId: buildId ?? '',
+      branch: branch ?? '',
+      commitSha: commitSha ?? '',
+      status: status ?? '',
+      startTime: startTime ?? DateTime.now(),
+      triggerType: triggerType ?? '',
       environment: environment,
       platform: platform,
       repositoryName: repositoryName,
@@ -42,19 +42,19 @@ extension CICDWorkflowEventRequestExtension on CICDWorkflowEventRequest {
   List<String> validate() {
     final errors = <String>[];
 
-    if (workflowName.trim().isEmpty) {
+    if (workflowName == null || workflowName!.trim().isEmpty) {
       errors.add('Workflow name cannot be empty');
     }
 
-    if (buildId.trim().isEmpty) {
+    if (buildId == null || buildId!.trim().isEmpty) {
       errors.add('Build ID cannot be empty');
     }
 
-    if (branch.trim().isEmpty) {
+    if (branch == null || branch!.trim().isEmpty) {
       errors.add('Branch cannot be empty');
     }
 
-    if (commitSha.trim().isEmpty) {
+    if (commitSha == null || commitSha!.trim().isEmpty) {
       errors.add('Commit SHA cannot be empty');
     }
 
@@ -67,7 +67,11 @@ extension CICDWorkflowEventRequestExtension on CICDWorkflowEventRequest {
           'Trigger type must be one of: push, pull_request, manual, schedule');
     }
 
-    if (startTime.isAfter(DateTime.now())) {
+    if (startTime == null) {
+      errors.add('Start time cannot be null');
+    }
+
+    if (startTime!.isAfter(DateTime.now())) {
       errors.add('Start time cannot be in the future');
     }
 

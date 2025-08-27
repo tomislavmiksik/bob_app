@@ -8,3 +8,4 @@ export 'package:bob_be_server/src/generated/classes/cicd/cicd_workflow_event.dar
 export 'package:bob_be_server/src/generated/classes/cicd/cicd_workflow_event_request.dart';
 export 'package:bob_be_server/src/generated/classes/greeting.dart';
 export 'package:bob_be_server/src/generated/enums/cicd_workflow_platform.dart';
+export 'package:bob_be_server/src/generated/exceptions/bad_request_exception.dart';

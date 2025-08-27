@@ -14,13 +14,13 @@ import '../../enums/cicd_workflow_platform.dart' as _i2;
 
 abstract class CICDWorkflowEventRequest implements _i1.SerializableModel {
   CICDWorkflowEventRequest._({
-    required this.workflowName,
-    required this.buildId,
-    required this.branch,
-    required this.commitSha,
-    required this.status,
-    required this.startTime,
-    required this.triggerType,
+    this.workflowName,
+    this.buildId,
+    this.branch,
+    this.commitSha,
+    this.status,
+    this.startTime,
+    this.triggerType,
     this.environment,
     this.platform,
     this.repositoryName,
@@ -30,13 +30,13 @@ abstract class CICDWorkflowEventRequest implements _i1.SerializableModel {
   });
 
   factory CICDWorkflowEventRequest({
-    required String workflowName,
-    required String buildId,
-    required String branch,
-    required String commitSha,
-    required String status,
-    required DateTime startTime,
-    required String triggerType,
+    String? workflowName,
+    String? buildId,
+    String? branch,
+    String? commitSha,
+    String? status,
+    DateTime? startTime,
+    String? triggerType,
     String? environment,
     _i2.CiCdPlatform? platform,
     String? repositoryName,
@@ -48,14 +48,15 @@ abstract class CICDWorkflowEventRequest implements _i1.SerializableModel {
   factory CICDWorkflowEventRequest.fromJson(
       Map<String, dynamic> jsonSerialization) {
     return CICDWorkflowEventRequest(
-      workflowName: jsonSerialization['workflowName'] as String,
-      buildId: jsonSerialization['buildId'] as String,
-      branch: jsonSerialization['branch'] as String,
-      commitSha: jsonSerialization['commitSha'] as String,
-      status: jsonSerialization['status'] as String,
-      startTime:
-          _i1.DateTimeJsonExtension.fromJson(jsonSerialization['startTime']),
-      triggerType: jsonSerialization['triggerType'] as String,
+      workflowName: jsonSerialization['workflowName'] as String?,
+      buildId: jsonSerialization['buildId'] as String?,
+      branch: jsonSerialization['branch'] as String?,
+      commitSha: jsonSerialization['commitSha'] as String?,
+      status: jsonSerialization['status'] as String?,
+      startTime: jsonSerialization['startTime'] == null
+          ? null
+          : _i1.DateTimeJsonExtension.fromJson(jsonSerialization['startTime']),
+      triggerType: jsonSerialization['triggerType'] as String?,
       environment: jsonSerialization['environment'] as String?,
       platform: jsonSerialization['platform'] == null
           ? null
@@ -68,19 +69,19 @@ abstract class CICDWorkflowEventRequest implements _i1.SerializableModel {
     );
   }
 
-  String workflowName;
+  String? workflowName;
 
-  String buildId;
+  String? buildId;
 
-  String branch;
+  String? branch;
 
-  String commitSha;
+  String? commitSha;
 
-  String status;
+  String? status;
 
-  DateTime startTime;
+  DateTime? startTime;
 
-  String triggerType;
+  String? triggerType;
 
   String? environment;
 
@@ -115,13 +116,13 @@ abstract class CICDWorkflowEventRequest implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
-      'workflowName': workflowName,
-      'buildId': buildId,
-      'branch': branch,
-      'commitSha': commitSha,
-      'status': status,
-      'startTime': startTime.toJson(),
-      'triggerType': triggerType,
+      if (workflowName != null) 'workflowName': workflowName,
+      if (buildId != null) 'buildId': buildId,
+      if (branch != null) 'branch': branch,
+      if (commitSha != null) 'commitSha': commitSha,
+      if (status != null) 'status': status,
+      if (startTime != null) 'startTime': startTime?.toJson(),
+      if (triggerType != null) 'triggerType': triggerType,
       if (environment != null) 'environment': environment,
       if (platform != null) 'platform': platform?.toJson(),
       if (repositoryName != null) 'repositoryName': repositoryName,
@@ -141,13 +142,13 @@ class _Undefined {}
 
 class _CICDWorkflowEventRequestImpl extends CICDWorkflowEventRequest {
   _CICDWorkflowEventRequestImpl({
-    required String workflowName,
-    required String buildId,
-    required String branch,
-    required String commitSha,
-    required String status,
-    required DateTime startTime,
-    required String triggerType,
+    String? workflowName,
+    String? buildId,
+    String? branch,
+    String? commitSha,
+    String? status,
+    DateTime? startTime,
+    String? triggerType,
     String? environment,
     _i2.CiCdPlatform? platform,
     String? repositoryName,
@@ -175,13 +176,13 @@ class _CICDWorkflowEventRequestImpl extends CICDWorkflowEventRequest {
   @_i1.useResult
   @override
   CICDWorkflowEventRequest copyWith({
-    String? workflowName,
-    String? buildId,
-    String? branch,
-    String? commitSha,
-    String? status,
-    DateTime? startTime,
-    String? triggerType,
+    Object? workflowName = _Undefined,
+    Object? buildId = _Undefined,
+    Object? branch = _Undefined,
+    Object? commitSha = _Undefined,
+    Object? status = _Undefined,
+    Object? startTime = _Undefined,
+    Object? triggerType = _Undefined,
     Object? environment = _Undefined,
     Object? platform = _Undefined,
     Object? repositoryName = _Undefined,
@@ -190,13 +191,13 @@ class _CICDWorkflowEventRequestImpl extends CICDWorkflowEventRequest {
     Object? pullRequestNumber = _Undefined,
   }) {
     return CICDWorkflowEventRequest(
-      workflowName: workflowName ?? this.workflowName,
-      buildId: buildId ?? this.buildId,
-      branch: branch ?? this.branch,
-      commitSha: commitSha ?? this.commitSha,
-      status: status ?? this.status,
-      startTime: startTime ?? this.startTime,
-      triggerType: triggerType ?? this.triggerType,
+      workflowName: workflowName is String? ? workflowName : this.workflowName,
+      buildId: buildId is String? ? buildId : this.buildId,
+      branch: branch is String? ? branch : this.branch,
+      commitSha: commitSha is String? ? commitSha : this.commitSha,
+      status: status is String? ? status : this.status,
+      startTime: startTime is DateTime? ? startTime : this.startTime,
+      triggerType: triggerType is String? ? triggerType : this.triggerType,
       environment: environment is String? ? environment : this.environment,
       platform: platform is _i2.CiCdPlatform? ? platform : this.platform,
       repositoryName:
