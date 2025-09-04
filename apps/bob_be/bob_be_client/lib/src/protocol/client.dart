@@ -11,8 +11,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:bob_be_client/src/protocol/greeting.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:bob_be_client/src/protocol/classes/greeting.dart' as _i3;
+import 'package:bob_be_client/src/protocol/classes/pipeline/responses/upload_config_response.dart'
+    as _i4;
+import 'package:bob_be_client/src/protocol/classes/pipeline/requests/upload_config_request.dart'
+    as _i5;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
+import 'protocol.dart' as _i7;
 
 /// This is an example endpoint that returns a greeting message through
 /// its [hello] method.
@@ -32,6 +37,41 @@ class EndpointGreeting extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointPipeline extends _i1.EndpointRef {
+  EndpointPipeline(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'pipeline';
+
+  _i2.Future<String> fetchAll() => caller.callServerEndpoint<String>(
+        'pipeline',
+        'fetchAll',
+        {},
+      );
+
+  _i2.Future<_i4.UploadConfigResponse> uploadYamlConfiguration({
+    required _i5.UploadConfigRequest request,
+    required String fileData,
+  }) =>
+      caller.callServerEndpoint<_i4.UploadConfigResponse>(
+        'pipeline',
+        'uploadYamlConfiguration',
+        {
+          'request': request,
+          'fileData': fileData,
+        },
+      );
+}
+
+class Modules {
+  Modules(Client client) {
+    auth = _i6.Caller(client);
+  }
+
+  late final _i6.Caller auth;
+}
+
 class Client extends _i1.ServerpodClientShared {
   Client(
     String host, {
@@ -48,7 +88,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i7.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -59,13 +99,23 @@ class Client extends _i1.ServerpodClientShared {
               disconnectStreamsOnLostInternetConnection,
         ) {
     greeting = EndpointGreeting(this);
+    pipeline = EndpointPipeline(this);
+    modules = Modules(this);
   }
 
   late final EndpointGreeting greeting;
 
-  @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'greeting': greeting};
+  late final EndpointPipeline pipeline;
+
+  late final Modules modules;
 
   @override
-  Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'greeting': greeting,
+        'pipeline': pipeline,
+      };
+
+  @override
+  Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
+      {'auth': modules.auth};
 }

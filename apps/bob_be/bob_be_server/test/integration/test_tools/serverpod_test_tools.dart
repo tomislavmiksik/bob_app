@@ -14,7 +14,11 @@
 import 'package:serverpod_test/serverpod_test.dart' as _i1;
 import 'package:serverpod/serverpod.dart' as _i2;
 import 'dart:async' as _i3;
-import 'package:bob_be_server/src/generated/greeting.dart' as _i4;
+import 'package:bob_be_server/src/generated/classes/greeting.dart' as _i4;
+import 'package:bob_be_server/src/generated/classes/pipeline/responses/upload_config_response.dart'
+    as _i5;
+import 'package:bob_be_server/src/generated/classes/pipeline/requests/upload_config_request.dart'
+    as _i6;
 import 'package:bob_be_server/src/generated/protocol.dart';
 import 'package:bob_be_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -102,6 +106,8 @@ void withServerpod(
 
 class TestEndpoints {
   late final _GreetingEndpoint greeting;
+
+  late final _PipelineEndpoint pipeline;
 }
 
 class _InternalTestEndpoints extends TestEndpoints
@@ -112,6 +118,10 @@ class _InternalTestEndpoints extends TestEndpoints
     _i2.EndpointDispatch endpoints,
   ) {
     greeting = _GreetingEndpoint(
+      endpoints,
+      serializationManager,
+    );
+    pipeline = _PipelineEndpoint(
       endpoints,
       serializationManager,
     );
@@ -150,6 +160,76 @@ class _GreetingEndpoint {
           _localUniqueSession,
           _localCallContext.arguments,
         ) as _i3.Future<_i4.Greeting>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+}
+
+class _PipelineEndpoint {
+  _PipelineEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _i2.EndpointDispatch _endpointDispatch;
+
+  final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<String> fetchAll(_i1.TestSessionBuilder sessionBuilder) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+        endpoint: 'pipeline',
+        method: 'fetchAll',
+      );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'pipeline',
+          methodName: 'fetchAll',
+          parameters: _i1.testObjectToJson({}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue = await (_localCallContext.method.call(
+          _localUniqueSession,
+          _localCallContext.arguments,
+        ) as _i3.Future<String>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _i3.Future<_i5.UploadConfigResponse> uploadYamlConfiguration(
+    _i1.TestSessionBuilder sessionBuilder, {
+    required _i6.UploadConfigRequest request,
+    required String fileData,
+  }) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+        endpoint: 'pipeline',
+        method: 'uploadYamlConfiguration',
+      );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'pipeline',
+          methodName: 'uploadYamlConfiguration',
+          parameters: _i1.testObjectToJson({
+            'request': request,
+            'fileData': fileData,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue = await (_localCallContext.method.call(
+          _localUniqueSession,
+          _localCallContext.arguments,
+        ) as _i3.Future<_i5.UploadConfigResponse>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

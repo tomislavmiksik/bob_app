@@ -1,0 +1,17 @@
+name: bob_models
+description: Shared models and generated classes for Bob app
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  serverpod: ^2.9.1
+  serverpod_client: ^2.9.1
+  bob_be_server:
+    path: '../../apps/bob_be/bob_be_server'
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

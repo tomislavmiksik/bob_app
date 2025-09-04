@@ -1,0 +1,6 @@
+class: UploadConfigRequest
+fields:
+  repositoryName: String
+  platform: CiCdPlatform
+  fileName: String
+  overwriteExisting: bool, default=false

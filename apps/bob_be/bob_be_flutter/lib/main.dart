@@ -1,5 +1,6 @@
 import 'package:bob_be_client/bob_be_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 
 /// Sets up a global client object that can be used to talk to the server from
@@ -66,7 +67,15 @@ class MyHomePageState extends State<MyHomePage> {
   /// is successful.
   void _callHello() async {
     try {
-      final result = await client.greeting.hello(_textEditingController.text);
+      final file = await rootBundle.loadString('assets/files/codemagic.yaml');
+      final result = await client.pipeline.uploadYamlConfiguration(
+        request: UploadConfigRequest(
+          repositoryName: 'repo',
+          platform: CiCdPlatform.Codemagic,
+          fileName: 'codemagic.yaml',
+        ),
+        fileData: file,
+      );
       setState(() {
         _errorMessage = null;
         _resultMessage = result.message;

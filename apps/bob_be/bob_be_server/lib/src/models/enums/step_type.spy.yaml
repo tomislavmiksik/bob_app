@@ -1,0 +1,10 @@
+enum: StepType
+serialized: byName
+values:
+  - checkout
+  - install
+  - build
+  - test
+  - deploy
+  - script
+  - publish

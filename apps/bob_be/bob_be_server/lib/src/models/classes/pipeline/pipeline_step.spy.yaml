@@ -1,0 +1,16 @@
+class: PipelineStep
+table: pipeline_steps
+fields:
+  id: UuidValue, defaultModel=random
+  name: String
+  ### Bi-directional reference to parent (Pipeline)
+  pipeline: Pipeline?, relation(name=pipeline_steps)
+  configuration: PipelineConfiguration?, relation(name=pipeline_configuration_steps)
+  order: int
+  command: String?
+  workingDir: String?
+  createdAt: DateTime, defaultModel=now
+  updatedAt: DateTime?
+indexes:
+  pipeline_step_order_idx:
+    fields: pipelineId, order

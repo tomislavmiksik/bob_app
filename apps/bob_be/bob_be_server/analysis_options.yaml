@@ -19,6 +19,9 @@ linter:
   rules:
     unawaited_futures: true
     avoid_print: true
+    use_string_in_part_of_directives: false
+    require_trailing_commas: true
+    unnecessary_library_name: false
 
 analyzer:
   exclude:

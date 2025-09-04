@@ -1,6 +1,61 @@
 name: bob_app
-
 packages:
   - apps/**
   - packages/**
 
+scripts:
+  generate:all:
+    steps:
+      - melos run generate:serverpod --no-select
+      - melos run generate:exports
+    description: Generate serverpod classes and update shared exports
+
+  generate:exports:
+    run: fvm dart run tools/generate_shared_exports.dart
+    description: Update shared model exports
+
+  generate:serverpod:
+    description: Generate Serverpod client
+    exec: serverpod generate
+    packageFilters:
+      scope: bob_be_server
+
+  dev:server-migrate:
+    description: Generate and run on server
+    exec: serverpod create-migration
+    packageFilters:
+      scope: bob_be_server
+
+  dev:server-run:
+    description: Run for the first time without applying migrations, suited for initial setup
+    exec: dart run bin/main.dart
+    packageFilters:
+      scope: bob_be_server
+
+
+  dev:server-run-with-migrations:
+    description: Run if there is any change related to the database
+    exec: dart run bin/main.dart --apply-migrations
+    packageFilters:
+      scope: bob_be_server
+
+  dev:frontend:
+    exec: fvm flutter run
+    packageFilters:
+      scope: bob_be_frontend
+
+  dev:docker-compose-db:
+    description: Run docker containers for serverpod
+    exec: docker compose up --build --detach
+    packageFilters:
+      scope: bob_be_server
+
+  deps:get:
+    exec: |
+      if grep -q "flutter" pubspec.yaml; then
+        fvm flutter pub get
+      else
+        fvm dart pub get
+      fi
+    packageFilters:
+      ignore: bob_app  # Skip workspace root

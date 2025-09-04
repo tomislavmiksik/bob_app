@@ -1,0 +1,22 @@
+class: Pipeline
+table: pipelines
+fields:
+  id: UuidValue, defaultModel=random
+  name: String
+  repositoryName: String
+  platform: CiCdPlatform
+  description: String?
+  ### Used to determine if pipeline is available or not for use
+  isActive: bool, default=true
+  configurationHash: String?
+  lastConfigUpdate: DateTime?
+  createdAt: DateTime, defaultModel=now
+  updatedAt: DateTime?
+  steps: List<PipelineStep>?, relation(name=pipeline_steps)
+  configuration: List<PipelineConfiguration>?, relation(name=pipeline_configurations)
+indexes:
+  pipeline_unique_idx:
+    fields: repositoryName, name, platform
+    unique: true
+  pipeline_active_idx:
+    fields: isActive, repositoryName

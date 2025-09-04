@@ -1,0 +1,24 @@
+class: PipelineConfiguration
+table: pipeline_configurations
+fields:
+  id: UuidValue, defaultModel=random
+  pipeline: Pipeline?, relation(name=pipeline_configurations)
+  fileName: String
+  fileContent: String
+  contentHash: String
+  platform: CiCdPlatform
+  version: int, default=1
+  isActive: bool, default=true
+  extractedStepCount: int
+  uploadedBy: int?
+  steps: List<PipelineStep>?, relation(name=pipeline_configuration_steps)
+  createdAt: DateTime, defaultModel=now
+  updatedAt: DateTime?
+indexes:
+  config_pipeline_version_idx:
+    fields: pipelineId, version
+    unique: true
+  config_active_idx:
+    fields: pipelineId, isActive
+  config_hash_idx:
+    fields: contentHash

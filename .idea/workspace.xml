@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ed4d6c9-6645-4826-ac80-5e660898eba5" name="Changes" comment="feat: update README.md">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Melos_Run_____dev_server_run_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/melos_run_dev_server.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_client/lib/src/protocol/classes/pipeline/pipeline.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_client/lib/src/protocol/classes/pipeline/pipeline.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_client/lib/src/protocol/classes/pipeline/pipeline_configuration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_client/lib/src/protocol/classes/pipeline/pipeline_configuration.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_client/lib/src/protocol/protocol.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_client/lib/src/protocol/protocol.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/endpoints/pipeline/pipeline_endpoints.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/endpoints/pipeline/pipeline_endpoints.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/generated/classes/pipeline/pipeline.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/generated/classes/pipeline/pipeline.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/generated/classes/pipeline/pipeline_configuration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/generated/classes/pipeline/pipeline_configuration.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/generated/protocol.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/generated/protocol.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/pipeline.spy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/pipeline.spy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/pipeline_configuration.spy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/pipeline_configuration.spy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/pipeline_step.spy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/pipeline_step.spy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/services/bob_app_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/services/bob_app_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/services/pipelines/pipeline_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/services/pipelines/pipeline_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902070108662/definition.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902070108662/definition.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902070108662/definition_project.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902070108662/migration.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902070108662/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902122117716/definition.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902122117716/definition.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902122117716/definition_project.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902122117716/migration.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/20250902122117716/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/migrations/migration_registry.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/bob_be/bob_be_server/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/bob_be/bob_be_server/repair-migration/20250902065926279.sql" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tomislavmiksik&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:tomislavmiksik/bob_app.git&quot;,
+    &quot;accountId&quot;: &quot;7072e511-51af-4815-992b-382e414dac88&quot;
+  }
+}</component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="31xDixYcWeQd8BAckOqaqRnOdB0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.Flutter Run -> 'bob_be_flutter'.executor": "Debug",
+    "Flutter.Flutter Run -> 'bob_fe'.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "Shell Script.Melos Run -> 'dev:server'.executor": "Run",
+    "Shell Script.Melos Run -> 'dev:server-run'.executor": "Debug",
+    "Shell Script.Melos Run -> 'generate:all'.executor": "Run",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "code.cleanup.on.save": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/tomislavmiksik/Developer/bob_app",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/bob_be/bob_be_flutter/assets/files" />
+      <recent name="$PROJECT_DIR$/apps/bob_be/bob_be_server/lib/src/models/classes/pipeline/responses" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Shell Script.Melos Run -&gt; 'dev:server-run'">
+    <configuration default="true" type="AppleRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" IS_LOCATION_SIMULATION_SUPPORTED="false" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Flutter.Flutter Run -&gt; 'bob_be_flutter'" />
+      <item itemvalue="Flutter.Flutter Run -&gt; 'bob_fe'" />
+      <item itemvalue="Shell Script.Melos -&gt; Bootstrap Workspace" />
+      <item itemvalue="Shell Script.Melos -&gt; Clean Workspace" />
+      <item itemvalue="Shell Script.Melos Run -&gt; 'dev:frontend'" />
+      <item itemvalue="Shell Script.Melos Run -&gt; 'dev:server-run'" />
+      <item itemvalue="Shell Script.Melos Run -&gt; 'generate:all'" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ed4d6c9-6645-4826-ac80-5e660898eba5" name="Changes" comment="" />
+      <created>1756456961256</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756456961256</updated>
+    </task>
+    <task id="LOCAL-00001" summary="feat: setup initial file .yaml file handling, configuration also refactoring of classes">
+      <option name="closed" value="true" />
+      <created>1756821994210</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1756821994210</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: add README.md">
+      <option name="closed" value="true" />
+      <created>1756883462838</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1756883462838</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: update README.md">
+      <option name="closed" value="true" />
+      <created>1756883505852</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1756883505852</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: setup initial file .yaml file handling, configuration also refactoring of classes" />
+    <MESSAGE value="feat: add README.md" />
+    <MESSAGE value="feat: update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update README.md" />
+  </component>
+</project>

@@ -1,0 +1,417 @@
+{
+  "moduleName": "bob_be",
+  "tables": [
+    {
+      "name": "pipeline_configurations",
+      "dartName": "PipelineConfiguration",
+      "module": "bob_be",
+      "schema": "public",
+      "columns": [
+        {
+          "name": "id",
+          "columnType": 7,
+          "isNullable": false,
+          "columnDefault": "gen_random_uuid()",
+          "dartType": "UuidValue"
+        },
+        {
+          "name": "pipelineId",
+          "columnType": 7,
+          "isNullable": false,
+          "dartType": "UuidValue"
+        },
+        {
+          "name": "fileName",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "name": "fileContent",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "name": "contentHash",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "name": "platform",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "protocol:CiCdPlatform"
+        },
+        {
+          "name": "version",
+          "columnType": 6,
+          "isNullable": false,
+          "columnDefault": "1",
+          "dartType": "int"
+        },
+        {
+          "name": "isActive",
+          "columnType": 1,
+          "isNullable": false,
+          "columnDefault": "true",
+          "dartType": "bool"
+        },
+        {
+          "name": "extractedStepCount",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "name": "uploadedBy",
+          "columnType": 6,
+          "isNullable": true,
+          "dartType": "int?"
+        },
+        {
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        },
+        {
+          "name": "updatedAt",
+          "columnType": 4,
+          "isNullable": true,
+          "dartType": "DateTime?"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "constraintName": "pipeline_configurations_fk_0",
+          "columns": [
+            "pipelineId"
+          ],
+          "referenceTable": "pipelines",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "pipeline_configurations_pkey",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        },
+        {
+          "indexName": "config_pipeline_version_idx",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "pipelineId"
+            },
+            {
+              "type": 0,
+              "definition": "version"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": false
+        },
+        {
+          "indexName": "config_active_idx",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "pipelineId"
+            },
+            {
+              "type": 0,
+              "definition": "isActive"
+            }
+          ],
+          "type": "btree",
+          "isUnique": false,
+          "isPrimary": false
+        },
+        {
+          "indexName": "config_hash_idx",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "contentHash"
+            }
+          ],
+          "type": "btree",
+          "isUnique": false,
+          "isPrimary": false
+        }
+      ],
+      "managed": true
+    },
+    {
+      "name": "pipeline_steps",
+      "dartName": "PipelineStep",
+      "module": "bob_be",
+      "schema": "public",
+      "columns": [
+        {
+          "name": "id",
+          "columnType": 7,
+          "isNullable": false,
+          "columnDefault": "gen_random_uuid()",
+          "dartType": "UuidValue"
+        },
+        {
+          "name": "name",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "name": "pipelineId",
+          "columnType": 7,
+          "isNullable": false,
+          "dartType": "UuidValue"
+        },
+        {
+          "name": "configurationId",
+          "columnType": 7,
+          "isNullable": false,
+          "dartType": "UuidValue"
+        },
+        {
+          "name": "order",
+          "columnType": 6,
+          "isNullable": false,
+          "dartType": "int"
+        },
+        {
+          "name": "command",
+          "columnType": 0,
+          "isNullable": true,
+          "dartType": "String?"
+        },
+        {
+          "name": "workingDir",
+          "columnType": 0,
+          "isNullable": true,
+          "dartType": "String?"
+        },
+        {
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        },
+        {
+          "name": "updatedAt",
+          "columnType": 4,
+          "isNullable": true,
+          "dartType": "DateTime?"
+        }
+      ],
+      "foreignKeys": [
+        {
+          "constraintName": "pipeline_steps_fk_0",
+          "columns": [
+            "pipelineId"
+          ],
+          "referenceTable": "pipelines",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        },
+        {
+          "constraintName": "pipeline_steps_fk_1",
+          "columns": [
+            "configurationId"
+          ],
+          "referenceTable": "pipeline_configurations",
+          "referenceTableSchema": "public",
+          "referenceColumns": [
+            "id"
+          ],
+          "onUpdate": 3,
+          "onDelete": 3
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "pipeline_steps_pkey",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        },
+        {
+          "indexName": "pipeline_step_order_idx",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "pipelineId"
+            },
+            {
+              "type": 0,
+              "definition": "order"
+            }
+          ],
+          "type": "btree",
+          "isUnique": false,
+          "isPrimary": false
+        }
+      ],
+      "managed": true
+    },
+    {
+      "name": "pipelines",
+      "dartName": "Pipeline",
+      "module": "bob_be",
+      "schema": "public",
+      "columns": [
+        {
+          "name": "id",
+          "columnType": 7,
+          "isNullable": false,
+          "columnDefault": "gen_random_uuid()",
+          "dartType": "UuidValue"
+        },
+        {
+          "name": "name",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "name": "repositoryName",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "String"
+        },
+        {
+          "name": "platform",
+          "columnType": 0,
+          "isNullable": false,
+          "dartType": "protocol:CiCdPlatform"
+        },
+        {
+          "name": "description",
+          "columnType": 0,
+          "isNullable": true,
+          "dartType": "String?"
+        },
+        {
+          "name": "isActive",
+          "columnType": 1,
+          "isNullable": false,
+          "columnDefault": "true",
+          "dartType": "bool"
+        },
+        {
+          "name": "configurationHash",
+          "columnType": 0,
+          "isNullable": true,
+          "dartType": "String?"
+        },
+        {
+          "name": "lastConfigUpdate",
+          "columnType": 4,
+          "isNullable": true,
+          "dartType": "DateTime?"
+        },
+        {
+          "name": "createdAt",
+          "columnType": 4,
+          "isNullable": false,
+          "dartType": "DateTime"
+        },
+        {
+          "name": "updatedAt",
+          "columnType": 4,
+          "isNullable": true,
+          "dartType": "DateTime?"
+        }
+      ],
+      "foreignKeys": [],
+      "indexes": [
+        {
+          "indexName": "pipelines_pkey",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "id"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": true
+        },
+        {
+          "indexName": "pipeline_unique_idx",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "repositoryName"
+            },
+            {
+              "type": 0,
+              "definition": "name"
+            },
+            {
+              "type": 0,
+              "definition": "platform"
+            }
+          ],
+          "type": "btree",
+          "isUnique": true,
+          "isPrimary": false
+        },
+        {
+          "indexName": "pipeline_active_idx",
+          "elements": [
+            {
+              "type": 0,
+              "definition": "isActive"
+            },
+            {
+              "type": 0,
+              "definition": "repositoryName"
+            }
+          ],
+          "type": "btree",
+          "isUnique": false,
+          "isPrimary": false
+        }
+      ],
+      "managed": true
+    }
+  ],
+  "installedModules": [
+    {
+      "module": "serverpod",
+      "version": "20240516151843329"
+    },
+    {
+      "module": "serverpod_auth",
+      "version": "20240520102713718"
+    }
+  ],
+  "migrationApiVersion": 1
+}

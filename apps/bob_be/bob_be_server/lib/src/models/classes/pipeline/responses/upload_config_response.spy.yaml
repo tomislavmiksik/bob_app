@@ -1,0 +1,10 @@
+class: UploadConfigResponse
+fields:
+  success: bool
+  message: String
+  pipeline: Pipeline?
+  steps: List<PipelineStep>?
+  configuration: PipelineConfiguration?
+  extractedStepCount: int?
+  warnings: List<String>?
+  errors: List<String>?

@@ -1,0 +1,4 @@
+exception: BadRequestException
+fields:
+  message: String
+  errorCode: int

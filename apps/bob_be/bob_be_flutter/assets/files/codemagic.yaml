@@ -1,0 +1,171 @@
+workflows:
+  flutter-workflow:
+    name: Ido Mobile Flutter Build
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    
+    environment:
+      flutter: 3.29.0
+      xcode: latest
+      cocoapods: default
+      groups:
+        - app_store_credentials
+        - google_play
+        - android_signing
+      vars:
+        PACKAGE_NAME: "com.example.app"
+        XCODE_WORKSPACE: "Runner.xcworkspace"
+        XCODE_SCHEME: "Runner"
+        CM_KEYSTORE_PATH: /tmp/keystore.keystore
+    
+    integrations:
+      app_store_connect: Codemagic
+
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/.gradle/caches
+        - $HOME/Library/Caches/CocoaPods
+
+    triggering:
+      events:
+        - tag
+      branch_patterns:
+        - pattern: 'main'
+          include: true
+          source: true
+        - pattern: 'develop'
+          include: true
+          source: true
+        - pattern: 'release/*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: 'v*'
+          include: true
+      cancel_previous_builds: true
+
+    scripts:
+      - name: Set up environment
+        script: |
+          echo "Flutter version:"
+          flutter --version
+          echo "Xcode version:"
+          xcodebuild -version
+
+      - name: Create environment file
+        script: |
+          #!/bin/sh
+          ENV_FILE=".env"
+          
+          cat > "$ENV_FILE" << 'EOF'
+          # API Configuration
+          API_URL=https://api.example.com
+          
+          # AdMob Configuration
+          ADMOB_APP_ID_IOS=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+          ADMOB_APP_ID_ANDROID=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+          ADMOB_BANNER_AD_ID_ANDROID=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+          ADMOB_BANNER_AD_ID_IOS=ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+          EOF
+
+      - name: Get Flutter dependencies
+        script: |
+          flutter packages pub get
+
+      - name: Generate code
+        script: |
+          dart run build_runner build --delete-conflicting-outputs
+          flutter pub run intl_utils:generate
+
+      - name: Set up Android keystore
+        script: |
+          base64 --decode > /tmp/keystore.keystore <<< "$KEYSTORE"
+          echo $CM_KEY_PASSWORD
+
+      - name: Flutter build APK
+        script: |
+          flutter build apk --release
+
+      - name: Flutter build App Bundle
+        script: |
+          flutter build appbundle --release
+
+      - name: Flutter build iOS
+        script: |
+          flutter build ios --release --no-codesign
+
+      - name: Build signed iOS
+        script: |
+          xcode-project use-profiles
+          xcode-project build-ipa \
+            --workspace ios/$XCODE_WORKSPACE \
+            --scheme $XCODE_SCHEME
+
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - example@example.com
+        notify:
+          success: true
+          failure: true
+
+      app_store_connect:
+        auth: integration
+        submit_to_app_store: false
+        submit_to_testflight: true
+
+  flutter-dev-workflow:
+    name: Ido Mobile Development Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    triggering:
+      events:
+        - pull_request
+      branch_patterns:
+        - pattern: 'feature/*'
+          include: true
+          source: true
+        - pattern: 'fix/*'
+          include: true
+          source: true
+
+    scripts:
+      - name: Get Flutter dependencies
+        script: |
+          flutter packages pub get
+
+      - name: Generate code
+        script: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter pub run intl_utils:generate
+
+      - name: Build debug APK
+        script: |
+          flutter build apk --debug
+
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - flutter_drive.log
+
+    publishing:
+      email:
+        recipients:
+          - example@example.com
+        notify:
+          success: false
+          failure: true

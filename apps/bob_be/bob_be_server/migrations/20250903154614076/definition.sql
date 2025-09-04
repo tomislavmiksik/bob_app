@@ -1,6 +1,67 @@
 BEGIN;
 
 --
+-- Class PipelineConfiguration as table pipeline_configurations
+--
+CREATE TABLE "pipeline_configurations" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    "pipelineId" uuid NOT NULL,
+    "fileName" text NOT NULL,
+    "fileContent" text NOT NULL,
+    "contentHash" text NOT NULL,
+    "platform" text NOT NULL,
+    "version" bigint NOT NULL DEFAULT 1,
+    "isActive" boolean NOT NULL DEFAULT true,
+    "extractedStepCount" bigint NOT NULL,
+    "uploadedBy" bigint,
+    "createdAt" timestamp without time zone NOT NULL,
+    "updatedAt" timestamp without time zone
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "config_pipeline_version_idx" ON "pipeline_configurations" USING btree ("pipelineId", "version");
+CREATE INDEX "config_active_idx" ON "pipeline_configurations" USING btree ("pipelineId", "isActive");
+CREATE INDEX "config_hash_idx" ON "pipeline_configurations" USING btree ("contentHash");
+
+--
+-- Class PipelineStep as table pipeline_steps
+--
+CREATE TABLE "pipeline_steps" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    "name" text NOT NULL,
+    "pipelineId" uuid NOT NULL,
+    "configurationId" uuid NOT NULL,
+    "order" bigint NOT NULL,
+    "command" text,
+    "workingDir" text,
+    "createdAt" timestamp without time zone NOT NULL,
+    "updatedAt" timestamp without time zone
+);
+
+-- Indexes
+CREATE INDEX "pipeline_step_order_idx" ON "pipeline_steps" USING btree ("pipelineId", "order");
+
+--
+-- Class Pipeline as table pipelines
+--
+CREATE TABLE "pipelines" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    "name" text NOT NULL,
+    "repositoryName" text NOT NULL,
+    "platform" text NOT NULL,
+    "description" text,
+    "isActive" boolean NOT NULL DEFAULT true,
+    "configurationHash" text,
+    "lastConfigUpdate" timestamp without time zone,
+    "createdAt" timestamp without time zone NOT NULL,
+    "updatedAt" timestamp without time zone
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "pipeline_unique_idx" ON "pipelines" USING btree ("repositoryName", "name", "platform");
+CREATE INDEX "pipeline_active_idx" ON "pipelines" USING btree ("isActive", "repositoryName");
+
+--
 -- Class CloudStorageEntry as table serverpod_cloud_storage
 --
 CREATE TABLE "serverpod_cloud_storage" (
@@ -207,6 +268,144 @@ CREATE INDEX "serverpod_session_log_touched_idx" ON "serverpod_session_log" USIN
 CREATE INDEX "serverpod_session_log_isopen_idx" ON "serverpod_session_log" USING btree ("isOpen");
 
 --
+-- Class AuthKey as table serverpod_auth_key
+--
+CREATE TABLE "serverpod_auth_key" (
+    "id" bigserial PRIMARY KEY,
+    "userId" bigint NOT NULL,
+    "hash" text NOT NULL,
+    "scopeNames" json NOT NULL,
+    "method" text NOT NULL
+);
+
+-- Indexes
+CREATE INDEX "serverpod_auth_key_userId_idx" ON "serverpod_auth_key" USING btree ("userId");
+
+--
+-- Class EmailAuth as table serverpod_email_auth
+--
+CREATE TABLE "serverpod_email_auth" (
+    "id" bigserial PRIMARY KEY,
+    "userId" bigint NOT NULL,
+    "email" text NOT NULL,
+    "hash" text NOT NULL
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "serverpod_email_auth_email" ON "serverpod_email_auth" USING btree ("email");
+
+--
+-- Class EmailCreateAccountRequest as table serverpod_email_create_request
+--
+CREATE TABLE "serverpod_email_create_request" (
+    "id" bigserial PRIMARY KEY,
+    "userName" text NOT NULL,
+    "email" text NOT NULL,
+    "hash" text NOT NULL,
+    "verificationCode" text NOT NULL
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "serverpod_email_auth_create_account_request_idx" ON "serverpod_email_create_request" USING btree ("email");
+
+--
+-- Class EmailFailedSignIn as table serverpod_email_failed_sign_in
+--
+CREATE TABLE "serverpod_email_failed_sign_in" (
+    "id" bigserial PRIMARY KEY,
+    "email" text NOT NULL,
+    "time" timestamp without time zone NOT NULL,
+    "ipAddress" text NOT NULL
+);
+
+-- Indexes
+CREATE INDEX "serverpod_email_failed_sign_in_email_idx" ON "serverpod_email_failed_sign_in" USING btree ("email");
+CREATE INDEX "serverpod_email_failed_sign_in_time_idx" ON "serverpod_email_failed_sign_in" USING btree ("time");
+
+--
+-- Class EmailReset as table serverpod_email_reset
+--
+CREATE TABLE "serverpod_email_reset" (
+    "id" bigserial PRIMARY KEY,
+    "userId" bigint NOT NULL,
+    "verificationCode" text NOT NULL,
+    "expiration" timestamp without time zone NOT NULL
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "serverpod_email_reset_verification_idx" ON "serverpod_email_reset" USING btree ("verificationCode");
+
+--
+-- Class GoogleRefreshToken as table serverpod_google_refresh_token
+--
+CREATE TABLE "serverpod_google_refresh_token" (
+    "id" bigserial PRIMARY KEY,
+    "userId" bigint NOT NULL,
+    "refreshToken" text NOT NULL
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "serverpod_google_refresh_token_userId_idx" ON "serverpod_google_refresh_token" USING btree ("userId");
+
+--
+-- Class UserImage as table serverpod_user_image
+--
+CREATE TABLE "serverpod_user_image" (
+    "id" bigserial PRIMARY KEY,
+    "userId" bigint NOT NULL,
+    "version" bigint NOT NULL,
+    "url" text NOT NULL
+);
+
+-- Indexes
+CREATE INDEX "serverpod_user_image_user_id" ON "serverpod_user_image" USING btree ("userId", "version");
+
+--
+-- Class UserInfo as table serverpod_user_info
+--
+CREATE TABLE "serverpod_user_info" (
+    "id" bigserial PRIMARY KEY,
+    "userIdentifier" text NOT NULL,
+    "userName" text,
+    "fullName" text,
+    "email" text,
+    "created" timestamp without time zone NOT NULL,
+    "imageUrl" text,
+    "scopeNames" json NOT NULL,
+    "blocked" boolean NOT NULL
+);
+
+-- Indexes
+CREATE UNIQUE INDEX "serverpod_user_info_user_identifier" ON "serverpod_user_info" USING btree ("userIdentifier");
+CREATE INDEX "serverpod_user_info_email" ON "serverpod_user_info" USING btree ("email");
+
+--
+-- Foreign relations for "pipeline_configurations" table
+--
+ALTER TABLE ONLY "pipeline_configurations"
+    ADD CONSTRAINT "pipeline_configurations_fk_0"
+    FOREIGN KEY("pipelineId")
+    REFERENCES "pipelines"("id")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+--
+-- Foreign relations for "pipeline_steps" table
+--
+ALTER TABLE ONLY "pipeline_steps"
+    ADD CONSTRAINT "pipeline_steps_fk_0"
+    FOREIGN KEY("pipelineId")
+    REFERENCES "pipelines"("id")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+ALTER TABLE ONLY "pipeline_steps"
+    ADD CONSTRAINT "pipeline_steps_fk_1"
+    FOREIGN KEY("configurationId")
+    REFERENCES "pipeline_configurations"("id")
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+--
 -- Foreign relations for "serverpod_log" table
 --
 ALTER TABLE ONLY "serverpod_log"
@@ -241,9 +440,9 @@ ALTER TABLE ONLY "serverpod_query_log"
 -- MIGRATION VERSION FOR bob_be
 --
 INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
-    VALUES ('bob_be', '20250812181419665', now())
+    VALUES ('bob_be', '20250903154614076', now())
     ON CONFLICT ("module")
-    DO UPDATE SET "version" = '20250812181419665', "timestamp" = now();
+    DO UPDATE SET "version" = '20250903154614076', "timestamp" = now();
 
 --
 -- MIGRATION VERSION FOR serverpod
@@ -252,6 +451,14 @@ INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
     VALUES ('serverpod', '20240516151843329', now())
     ON CONFLICT ("module")
     DO UPDATE SET "version" = '20240516151843329', "timestamp" = now();
+
+--
+-- MIGRATION VERSION FOR serverpod_auth
+--
+INSERT INTO "serverpod_migrations" ("module", "version", "timestamp")
+    VALUES ('serverpod_auth', '20240520102713718', now())
+    ON CONFLICT ("module")
+    DO UPDATE SET "version" = '20240520102713718', "timestamp" = now();
 
 
 COMMIT;
